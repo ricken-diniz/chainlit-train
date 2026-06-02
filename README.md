@@ -5,16 +5,26 @@ Para esta abordagem, é utilizado modelos do Ollama rodando localmente.
 
 ## Rodando o projeto
 
-
-### Ollama
-Primeiro, se for manter modelos de LLM localmente, certifique-se de instalar o Ollama e baixar o modelo desejado.
-
-### Dependências
+### Ferramentas exigidas
 ```
-pip install -r requirements.txt
+docker --version
+docker compose version
+rocm-smi                    # só se for usar GPU AMD
+```
+
+### Primeira vez
+Lembre-se de alteraar as variáveis de ambiente
+```
+cp .env.example .env
+docker compose up --build
 ```
 
 ### Executando
 ```
-chainlit run demo.py -w
+docker compose up
 ```
+
+## Variáveis de ambiente
+- OLLAMA_MODEL: Nome do modelo desejado
+- OLLAMA_HOST: Host e porta do Ollama (geralmente é fixo)
+- GPU_TYPE & OLLAMA_IMAGE_TAG: Configurações para rodar o Ollama em GPUs, use as sugestões dos comentários
